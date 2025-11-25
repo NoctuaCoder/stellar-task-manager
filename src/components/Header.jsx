@@ -1,4 +1,4 @@
-function Header() {
+function Header({ onSearch, onPriorityFilter, searchTerm, priorityFilter }) {
     return (
         <header className="dashboard-header">
             <div className="header-left">
@@ -7,40 +7,30 @@ function Header() {
 
             <div className="header-center">
                 <div className="filter-group">
-                    <select className="filter-select">
-                        <option>Time</option>
-                        <option>Today</option>
-                        <option>This Week</option>
-                        <option>This Month</option>
-                    </select>
-                    <select className="filter-select">
-                        <option>Level</option>
-                        <option>Low</option>
-                        <option>Medium</option>
-                        <option>High</option>
-                    </select>
-                    <select className="filter-select">
-                        <option>Language</option>
-                        <option>English</option>
-                        <option>Portuguese</option>
-                        <option>Spanish</option>
-                    </select>
-                    <select className="filter-select">
-                        <option>Type</option>
-                        <option>Personal</option>
-                        <option>Work</option>
-                        <option>Study</option>
+                    <select
+                        className="filter-select"
+                        value={priorityFilter}
+                        onChange={(e) => onPriorityFilter(e.target.value)}
+                    >
+                        <option value="all">All Priorities</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
                     </select>
                 </div>
             </div>
 
             <div className="header-right">
-                <button className="icon-btn" title="Search">
-                    <span>⌕</span>
-                </button>
-                <button className="icon-btn" title="Refresh">
-                    <span>↻</span>
-                </button>
+                <div className="search-box">
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Search tasks..."
+                        value={searchTerm}
+                        onChange={(e) => onSearch(e.target.value)}
+                    />
+                    <span className="search-icon">⌕</span>
+                </div>
                 <div className="user-profile">
                     <div className="user-info">
                         <span className="user-name">Noctua Coder</span>

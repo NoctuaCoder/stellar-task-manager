@@ -3,6 +3,8 @@ const { useState, useEffect } = React;
 function App() {
     const [tasks, setTasks] = useState([]);
     const [filter, setFilter] = useState('all');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [priorityFilter, setPriorityFilter] = useState('all');
 
     // Load tasks from localStorage on mount
     useEffect(() => {
@@ -45,9 +47,21 @@ function App() {
         ));
     };
 
+    const clearCompleted = () => {
+        setTasks(tasks.filter(task => !task.completed));
+    };
+
     const filteredTasks = tasks.filter(task => {
-        if (filter === 'active') return !task.completed;
-        if (filter === 'completed') return task.completed;
+        // Status filter
+        if (filter === 'active' && task.completed) return false;
+        if (filter === 'completed' && !task.completed) return false;
+
+        // Priority filter
+        if (priorityFilter !== 'all' && task.priority !== priorityFilter) return false;
+
+        // Search filter
+        if (searchTerm && !task.text.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+
         return true;
     });
 
@@ -76,7 +90,12 @@ function App() {
             <Sidebar />
 
             <div className="main-wrapper">
-                <Header />
+                <Header
+                    onSearch={setSearchTerm}
+                    onPriorityFilter={setPriorityFilter}
+                    searchTerm={searchTerm}
+                    priorityFilter={priorityFilter}
+                />
 
                 <div className="content">
                     <Stats tasks={tasks} />
@@ -102,6 +121,15 @@ function App() {
                         >
                             Completed ({tasks.filter(t => t.completed).length})
                         </button>
+                        {tasks.some(t => t.completed) && (
+                            <button
+                                className="filter-btn clear-btn"
+                                onClick={clearCompleted}
+                                style={{ marginLeft: 'auto', background: 'rgba(239, 68, 68, 0.1)', color: 'rgb(239, 68, 68)' }}
+                            >
+                                Clear Completed
+                            </button>
+                        )}
                     </div>
 
                     <TaskList
@@ -115,6 +143,13 @@ function App() {
                         <div className="empty-state">
                             <div className="empty-icon">★</div>
                             <p>No tasks yet. Create your first one!</p>
+                        </div>
+                    )}
+
+                    {tasks.length > 0 && filteredTasks.length === 0 && (
+                        <div className="empty-state">
+                            <div className="empty-icon">⌕</div>
+                            <p>No tasks match your filters</p>
                         </div>
                     )}
                 </div>
