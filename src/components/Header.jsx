@@ -43,11 +43,11 @@ function Header() {
                 </button>
                 <div className="user-profile">
                     <div className="user-info">
-                        <span className="user-name">Christine Eve</span>
-                        <span className="user-role">OWNER/ADMIN</span>
+                        <span className="user-name">Noctua Coder</span>
+                        <span className="user-role">DEVELOPER</span>
                     </div>
                     <div className="user-avatar">
-                        <span className="avatar-text">CE</span>
+                        <span className="avatar-text">NC</span>
                         <span className="status-dot"></span>
                     </div>
                 </div>

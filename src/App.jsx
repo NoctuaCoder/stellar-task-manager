@@ -53,6 +53,26 @@ function App() {
 
     return (
         <div className="dashboard">
+            {/* Particle Stars */}
+            <div className="stars">
+                {[...Array(50)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="star"
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                            animationDelay: `${Math.random() * 3}s`
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* 3D Gradient Blobs */}
+            <div className="gradient-blob blob-1"></div>
+            <div className="gradient-blob blob-2"></div>
+            <div className="gradient-blob blob-3"></div>
+
             <Sidebar />
 
             <div className="main-wrapper">
