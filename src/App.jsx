@@ -20,13 +20,52 @@ function App() {
         localStorage.setItem('stellar-tasks', JSON.stringify(tasks));
     }, [tasks]);
 
-    const addTask = (taskText, priority) => {
+    // Handle export/import actions
+    useEffect(() => {
+        if (currentView === 'export-json') {
+            DataExport.exportToJSON(tasks);
+            setCurrentView('dashboard');
+        } else if (currentView === 'export-csv') {
+            DataExport.exportToCSV(tasks);
+            setCurrentView('dashboard');
+        } else if (currentView === 'import-json') {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    DataExport.importFromJSON(file, (importedTasks, error) => {
+                        if (error) {
+                            alert('Import Error: ' + error);
+                        } else {
+                            const confirmed = confirm(
+                                `Import ${importedTasks.length} tasks?\n\n` +
+                                'This will replace your current tasks. Continue?'
+                            );
+                            if (confirmed) {
+                                setTasks(importedTasks);
+                                alert(`Successfully imported ${importedTasks.length} tasks!`);
+                            }
+                        }
+                    });
+                }
+            };
+            input.click();
+            setCurrentView('dashboard');
+        }
+    }, [currentView, tasks]);
+
+    const addTask = (taskText, priority, dueDate, category, tags) => {
         const newTask = {
             id: Date.now(),
             text: taskText,
             completed: false,
             priority: priority,
             createdAt: new Date().toISOString(),
+            dueDate: dueDate,
+            category: category,
+            tags: tags || [],
             creator: 'You'
         };
         setTasks([newTask, ...tasks]);
