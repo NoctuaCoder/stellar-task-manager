@@ -12,7 +12,17 @@
 
 </div>
 
----
+<br/>
+
+<div align="center">
+<pre style="color: #00BFFF; font-size: 8px; line-height: 1.2; opacity: 0.6;">
+    ✦       ✦       ✦       ✦       ✦       ✦       ✦
+      ·   ·   ·   ·   ·   ·   ·   ·   ·   ·   ·
+    ✦       ✦       ✦       ✦       ✦       ✦       ✦
+</pre>
+</div>
+
+<br/>
 
 ## 🎯 What It Does
 
@@ -183,7 +193,17 @@ MIT License - feel free to use this project for learning or portfolio purposes!
 - GitHub: [@NoctuaCoder](https://github.com/NoctuaCoder)
 - Portfolio: [noctuacoder.github.io](https://noctuacoder.github.io/NoctuaCoder/portfolio.html)
 
----
+<br/>
+
+<div align="center">
+<pre style="color: #00BFFF; font-size: 8px; line-height: 1.2; opacity: 0.6;">
+    ✦       ✦       ✦       ✦       ✦       ✦       ✦
+      ·   ·   ·   ·   ·   ·   ·   ·   ·   ·   ·
+    ✦       ✦       ✦       ✦       ✦       ✦       ✦
+</pre>
+</div>
+
+<br/>
 
 <div align="center">
 
