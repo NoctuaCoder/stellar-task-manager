@@ -5,6 +5,7 @@ function App() {
     const [filter, setFilter] = useState('all');
     const [searchTerm, setSearchTerm] = useState('');
     const [priorityFilter, setPriorityFilter] = useState('all');
+    const [currentView, setCurrentView] = useState('dashboard');
 
     // Load tasks from localStorage on mount
     useEffect(() => {
@@ -87,7 +88,7 @@ function App() {
             <div className="gradient-blob blob-2"></div>
             <div className="gradient-blob blob-3"></div>
 
-            <Sidebar />
+            <Sidebar currentView={currentView} onViewChange={setCurrentView} />
 
             <div className="main-wrapper">
                 <Header
