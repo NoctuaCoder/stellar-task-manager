@@ -23,7 +23,8 @@ function App() {
             text: taskText,
             completed: false,
             priority: priority,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            creator: 'You'
         };
         setTasks([newTask, ...tasks]);
     };
@@ -51,61 +52,52 @@ function App() {
     });
 
     return (
-        <div className="app">
-            <div className="noise"></div>
-            <div className="aurora-bg">
-                <div className="aurora-blob blob-1"></div>
-                <div className="aurora-blob blob-2"></div>
-                <div className="aurora-blob blob-3"></div>
-            </div>
+        <div className="dashboard">
+            <Sidebar />
 
-            <div className="container">
-                <header className="header">
-                    <h1 className="title">
-                        <span className="icon">✨</span>
-                        Stellar Task Manager
-                    </h1>
-                    <p className="subtitle">Organize your universe, one task at a time</p>
-                </header>
+            <div className="main-wrapper">
+                <Header />
 
-                <Stats tasks={tasks} />
+                <div className="content">
+                    <Stats tasks={tasks} />
 
-                <TaskForm onAddTask={addTask} />
+                    <TaskForm onAddTask={addTask} />
 
-                <div className="filter-tabs">
-                    <button
-                        className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-                        onClick={() => setFilter('all')}
-                    >
-                        All ({tasks.length})
-                    </button>
-                    <button
-                        className={`filter-btn ${filter === 'active' ? 'active' : ''}`}
-                        onClick={() => setFilter('active')}
-                    >
-                        Active ({tasks.filter(t => !t.completed).length})
-                    </button>
-                    <button
-                        className={`filter-btn ${filter === 'completed' ? 'active' : ''}`}
-                        onClick={() => setFilter('completed')}
-                    >
-                        Completed ({tasks.filter(t => t.completed).length})
-                    </button>
-                </div>
-
-                <TaskList
-                    tasks={filteredTasks}
-                    onToggle={toggleTask}
-                    onDelete={deleteTask}
-                    onEdit={editTask}
-                />
-
-                {tasks.length === 0 && (
-                    <div className="empty-state">
-                        <div className="empty-icon">🌟</div>
-                        <p>No tasks yet. Create your first one!</p>
+                    <div className="filter-tabs">
+                        <button
+                            className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+                            onClick={() => setFilter('all')}
+                        >
+                            All ({tasks.length})
+                        </button>
+                        <button
+                            className={`filter-btn ${filter === 'active' ? 'active' : ''}`}
+                            onClick={() => setFilter('active')}
+                        >
+                            Active ({tasks.filter(t => !t.completed).length})
+                        </button>
+                        <button
+                            className={`filter-btn ${filter === 'completed' ? 'active' : ''}`}
+                            onClick={() => setFilter('completed')}
+                        >
+                            Completed ({tasks.filter(t => t.completed).length})
+                        </button>
                     </div>
-                )}
+
+                    <TaskList
+                        tasks={filteredTasks}
+                        onToggle={toggleTask}
+                        onDelete={deleteTask}
+                        onEdit={editTask}
+                    />
+
+                    {tasks.length === 0 && (
+                        <div className="empty-state">
+                            <div className="empty-icon">🌟</div>
+                            <p>No tasks yet. Create your first one!</p>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

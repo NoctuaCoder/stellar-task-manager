@@ -12,46 +12,68 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
     };
 
     const priorityColors = {
-        low: '#00BFFF',
-        medium: '#FFD700',
-        high: '#FF1493'
+        low: 'rgb(16, 185, 129)',
+        medium: 'rgb(245, 158, 11)',
+        high: 'rgb(239, 68, 68)'
+    };
+
+    const getTaskDescription = () => {
+        const descriptions = {
+            high: 'High priority task requiring immediate attention and focus.',
+            medium: 'Standard priority task to be completed in due course.',
+            low: 'Low priority task that can be scheduled flexibly.'
+        };
+        return descriptions[task.priority] || 'Task to be completed.';
     };
 
     return (
-        <div className={`task-item glass-panel ${task.completed ? 'completed' : ''}`}>
-            <div className="task-content">
+        <div className={`task-item ${task.completed ? 'completed' : ''}`}>
+            <div className="task-icon-wrapper">
                 <input
                     type="checkbox"
                     className="task-checkbox"
                     checked={task.completed}
                     onChange={() => onToggle(task.id)}
                 />
+            </div>
 
-                {isEditing ? (
-                    <input
-                        type="text"
-                        className="task-edit-input"
-                        value={editText}
-                        onChange={(e) => setEditText(e.target.value)}
-                        onBlur={handleEdit}
-                        onKeyPress={(e) => e.key === 'Enter' && handleEdit()}
-                        autoFocus
-                    />
-                ) : (
-                    <span
-                        className="task-text"
-                        onDoubleClick={() => !task.completed && setIsEditing(true)}
-                    >
-                        {task.text}
+            <div className="task-content">
+                <div className="task-header">
+                    {isEditing ? (
+                        <input
+                            type="text"
+                            className="task-edit-input"
+                            value={editText}
+                            onChange={(e) => setEditText(e.target.value)}
+                            onBlur={handleEdit}
+                            onKeyPress={(e) => e.key === 'Enter' && handleEdit()}
+                            autoFocus
+                        />
+                    ) : (
+                        <h3
+                            className="task-text"
+                            onDoubleClick={() => !task.completed && setIsEditing(true)}
+                        >
+                            {task.text}
+                        </h3>
+                    )}
+                </div>
+
+                <p className="task-description">
+                    {getTaskDescription()}
+                </p>
+
+                <div className="task-footer">
+                    <span className="task-creator">
+                        Created by <strong>{task.creator || 'You'}</strong>
                     </span>
-                )}
-
-                <span
-                    className="priority-badge"
-                    style={{ backgroundColor: priorityColors[task.priority] }}
-                >
-                    {task.priority}
-                </span>
+                    <span
+                        className="priority-badge"
+                        style={{ backgroundColor: priorityColors[task.priority] }}
+                    >
+                        {task.priority}
+                    </span>
+                </div>
             </div>
 
             <div className="task-actions">
@@ -72,6 +94,10 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
                     🗑️
                 </button>
             </div>
+
+            <button className="task-arrow" onClick={() => onToggle(task.id)}>
+                {task.completed ? '✓' : '→'}
+            </button>
         </div>
     );
 }
