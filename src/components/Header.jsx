@@ -36,10 +36,10 @@ function Header() {
 
             <div className="header-right">
                 <button className="icon-btn" title="Search">
-                    <span>🔍</span>
+                    <span>⌕</span>
                 </button>
                 <button className="icon-btn" title="Refresh">
-                    <span>🔄</span>
+                    <span>↻</span>
                 </button>
                 <div className="user-profile">
                     <div className="user-info">

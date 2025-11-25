@@ -535,8 +535,9 @@ body {
 }
 
 .task-icon-wrapper::after {
-    content: '💻';
-    font-size: 32px;
+    content: '◈';
+    font-size: 36px;
+    font-weight: 300;
 }
 
 .task-checkbox {
@@ -690,6 +691,7 @@ body {
 .empty-icon {
     font-size: 64px;
     margin-bottom: var(--spacing-md);
+    font-weight: 300;
 }
 
 .empty-state p {

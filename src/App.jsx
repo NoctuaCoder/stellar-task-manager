@@ -93,7 +93,7 @@ function App() {
 
                     {tasks.length === 0 && (
                         <div className="empty-state">
-                            <div className="empty-icon">🌟</div>
+                            <div className="empty-icon">★</div>
                             <p>No tasks yet. Create your first one!</p>
                         </div>
                     )}

@@ -83,7 +83,7 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
                         onClick={() => setIsEditing(true)}
                         title="Edit task"
                     >
-                        ✏️
+                        ✎
                     </button>
                 )}
                 <button
@@ -91,7 +91,7 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
                     onClick={() => onDelete(task.id)}
                     title="Delete task"
                 >
-                    🗑️
+                    ×
                 </button>
             </div>
 

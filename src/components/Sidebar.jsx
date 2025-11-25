@@ -1,31 +1,31 @@
 function Sidebar() {
     const menuItems = [
-        { icon: '📊', label: 'Dashboard', active: true },
-        { icon: '📝', label: 'All Tasks', active: false },
-        { icon: '💬', label: 'Messages', active: false },
-        { icon: '👥', label: 'Friends', active: false },
-        { icon: '📅', label: 'Schedule', active: false }
+        { icon: '▦', label: 'Dashboard', active: true },
+        { icon: '☰', label: 'All Tasks', active: false },
+        { icon: '✉', label: 'Messages', active: false },
+        { icon: '◉', label: 'Friends', active: false },
+        { icon: '◫', label: 'Schedule', active: false }
     ];
 
     const bottomItems = [
-        { icon: '⚙️', label: 'Settings', active: false },
-        { icon: '📖', label: 'Directory', active: false }
+        { icon: '⚙', label: 'Settings', active: false },
+        { icon: '◈', label: 'Directory', active: false }
     ];
 
     return (
         <aside className="sidebar">
             <div className="sidebar-header">
                 <div className="logo">
-                    <span className="logo-icon">✨</span>
-                    <span className="logo-text">ēCoursie</span>
+                    <span className="logo-icon">★</span>
+                    <span className="logo-text">Stellar</span>
                 </div>
             </div>
 
             <nav className="sidebar-nav">
                 {menuItems.map((item, index) => (
-                    <a 
+                    <a
                         key={index}
-                        href="#" 
+                        href="#"
                         className={`nav-item ${item.active ? 'active' : ''}`}
                         onClick={(e) => e.preventDefault()}
                     >
@@ -37,9 +37,9 @@ function Sidebar() {
 
             <div className="sidebar-bottom">
                 {bottomItems.map((item, index) => (
-                    <a 
+                    <a
                         key={index}
-                        href="#" 
+                        href="#"
                         className="nav-item"
                         onClick={(e) => e.preventDefault()}
                     >
