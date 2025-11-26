@@ -1,6 +1,6 @@
-function TaskList({ tasks, onToggle, onDelete, onEdit }) {
+function TaskList({ tasks, onToggle, onDelete, onEdit, viewMode }) {
     return (
-        <div className="task-list">
+        <div className={`task-list ${viewMode === 'grid' ? 'grid-view' : ''}`}>
             {tasks.map(task => (
                 <TaskItem
                     key={task.id}

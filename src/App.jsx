@@ -105,8 +105,36 @@ function App() {
         return true;
     });
 
+    const handleBulkAction = (action) => {
+        if (action === 'markAllComplete') {
+            setTasks(tasks.map(t => ({ ...t, completed: true })));
+        } else if (action === 'deleteCompleted') {
+            if (confirm('Delete all completed tasks?')) {
+                setTasks(tasks.filter(t => !t.completed));
+            }
+        } else if (action === 'markAllImportant') {
+            setTasks(tasks.map(t => ({ ...t, priority: 'high' })));
+        }
+    };
+
+    const handleExport = () => setCurrentView('export-json');
+    const handleImport = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            DataExport.importFromJSON(file, (importedTasks, error) => {
+                if (error) {
+                    alert('Import Error: ' + error);
+                } else {
+                    if (confirm(`Import ${importedTasks.length} tasks? This will replace current tasks.`)) {
+                        setTasks(importedTasks);
+                    }
+                }
+            });
+        }
+    };
+
     return (
-        <div className="dashboard">
+        <div className={`dashboard ${currentView === 'grid' ? 'view-grid' : ''}`}>
             {/* Particle Stars */}
             <div className="stars">
                 {[...Array(50)].map((_, i) => (
@@ -177,6 +205,7 @@ function App() {
                         onToggle={toggleTask}
                         onDelete={deleteTask}
                         onEdit={editTask}
+                        viewMode={currentView}
                     />
 
                     {tasks.length === 0 && (
@@ -194,6 +223,14 @@ function App() {
                     )}
                 </div>
             </div>
+
+            <CommandBar
+                tasks={tasks}
+                onBulkAction={handleBulkAction}
+                onViewChange={setCurrentView}
+                onExport={handleExport}
+                onImport={handleImport}
+            />
         </div>
     );
 }
