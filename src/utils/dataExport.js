@@ -1,6 +1,6 @@
 // Data Export/Import Utilities for Stellar Task Manager
 
-const DataExport = {
+window.DataExport = {
     // Export tasks to JSON
     exportToJSON: (tasks) => {
         const dataStr = JSON.stringify(tasks, null, 2);
